@@ -1,8 +1,3 @@
-const express = require("express");
-const app = express();
-
-app.use(express.json());
-
 const inventory = [];
 
 const products = [
@@ -11,11 +6,9 @@ const products = [
   { id: 3, name: "Poción infinita", type: "consumible", ability: "curación", stock: -1 }
 ];
 
-
 function findProductById(productId) {
   return products.find((product) => product.id === productId);
 }
-
 
 function validateRequestBody(body) {
   const { playerId, productId, quantity } = body;
@@ -47,7 +40,6 @@ function validateRequestBody(body) {
   return null;
 }
 
-
 function buildInventoryItem(playerId, product, quantity) {
   return {
     inventoryItemId: Date.now(),
@@ -61,57 +53,80 @@ function buildInventoryItem(playerId, product, quantity) {
   };
 }
 
-app.post("/api/v1/inventory/items", (req, res) => {
-  try {
-    const validationError = validateRequestBody(req.body);
+function addItemToInventory(body) {
+  const validationError = validateRequestBody(body);
 
-    if (validationError) {
-      return res.status(400).json({
-        success: false,
-        message: validationError
-      });
-    }
-
-    const { playerId, productId, quantity } = req.body;
-
-    const product = findProductById(productId);
-
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: "Producto no encontrado."
-      });
-    }
-
-    const shouldDiscountStock = quantity !== -1 && product.stock !== -1;
-
-    if (shouldDiscountStock) {
-      if (product.stock < quantity) {
-        return res.status(400).json({
-          success: false,
-          message: "Stock insuficiente para completar la compra."
-        });
-      }
-
-      product.stock -= quantity;
-    }
-
-    const newInventoryItem = buildInventoryItem(playerId, product, quantity);
-    inventory.push(newInventoryItem);
-
-    return res.status(201).json({
-      success: true,
-      message: "Ítem agregado al inventario del jugador correctamente.",
-      data: {
-        item: newInventoryItem,
-        remainingStock: product.stock
-      }
-    });
-  } catch (error) {
-    return res.status(500).json({
+  if (validationError) {
+    return {
       success: false,
-      message: "Ocurrió un error interno al agregar el ítem al inventario.",
-      error: error.message
-    });
+      status: 400,
+      message: validationError
+    };
   }
-});
+
+  const { playerId, productId, quantity } = body;
+  const product = findProductById(productId);
+
+  if (!product) {
+    return {
+      success: false,
+      status: 404,
+      message: "Producto no encontrado."
+    };
+  }
+
+  const shouldDiscountStock = quantity !== -1 && product.stock !== -1;
+
+  if (shouldDiscountStock) {
+    if (product.stock < quantity) {
+      return {
+        success: false,
+        status: 400,
+        message: "Stock insuficiente para completar la compra."
+      };
+    }
+
+    product.stock -= quantity;
+  }
+
+  const newInventoryItem = buildInventoryItem(playerId, product, quantity);
+  inventory.push(newInventoryItem);
+
+  return {
+    success: true,
+    status: 201,
+    message: "Ítem agregado al inventario del jugador correctamente.",
+    data: {
+      item: newInventoryItem,
+      remainingStock: product.stock
+    }
+  };
+}
+
+// PRUEBAS
+console.log("=== Compra normal ===");
+console.log(addItemToInventory({
+  playerId: 1,
+  productId: 1,
+  quantity: 2
+}));
+
+console.log("=== Producto infinito ===");
+console.log(addItemToInventory({
+  playerId: 2,
+  productId: 3,
+  quantity: -1
+}));
+
+console.log("=== Stock insuficiente ===");
+console.log(addItemToInventory({
+  playerId: 3,
+  productId: 2,
+  quantity: 10
+}));
+
+console.log("=== Inventario final ===");
+console.log(inventory);
+
+console.log("=== Productos finales ===");
+console.log(products);
