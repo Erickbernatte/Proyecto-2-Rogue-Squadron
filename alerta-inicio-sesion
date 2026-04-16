@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alerta de Cambios al Iniciar Sesión</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 24px;
+    }
+
+    .alert-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .alert-box {
+      background: #fff8e1;
+      border-left: 6px solid #f59e0b;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .alert-box h2 {
+      margin-top: 0;
+      color: #92400e;
+    }
+
+    .alert-item {
+      background: white;
+      border: 1px solid #f3e8c8;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .alert-type {
+      font-weight: bold;
+      color: #b45309;
+      margin-bottom: 6px;
+    }
+
+    .alert-date {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .close-btn {
+      margin-top: 16px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #f59e0b;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .close-btn:hover {
+      background: #d97706;
+    }
+  </style>
+</head>
+<body>
+  <div class="alert-container">
+    <div class="alert-box" id="systemAlerts">
+      <h2>Notificaciones del sistema</h2>
+      <div id="alertsList"></div>
+      <button class="close-btn" onclick="closeAlerts()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const alerts = [
+      {
+        type: "Nuevo producto",
+        description: "Se añadió el producto 'Espada del Fénix' a la tienda.",
+        implementationDate: "2026-02-20"
+      },
+      {
+        type: "Modificación",
+        description: "Se actualizaron los atributos de varias armaduras del sistema.",
+        implementationDate: "2026-02-21"
+      },
+      {
+        type: "Producto suspendido/reactivado",
+        description: "La Poción de Energía fue reactivada después de mantenimiento.",
+        implementationDate: "2026-02-22"
+      },
+      {
+        type: "Cambio de balance",
+        description: "Se ajustó el daño base de armas épicas para equilibrar el juego.",
+        implementationDate: "2026-02-23"
+      }
+    ];
+
+    function renderAlerts() {
+      const alertsList = document.getElementById("alertsList");
+
+      alerts.forEach(alert => {
+        const item = document.createElement("div");
+        item.className = "alert-item";
+
+        item.innerHTML = `
+          <div class="alert-type">${alert.type}</div>
+          <div>${alert.description}</div>
+          <div class="alert-date"><strong>Fecha de implementación:</strong> ${alert.implementationDate}</div>
+        `;
+
+        alertsList.appendChild(item);
+      });
+    }
+
+    function closeAlerts() {
+      document.getElementById("systemAlerts").classList.add("hidden");
+    }
+
+    window.onload = function () {
+      renderAlerts();
+    };
+  </script>
+</body>
+</html>
