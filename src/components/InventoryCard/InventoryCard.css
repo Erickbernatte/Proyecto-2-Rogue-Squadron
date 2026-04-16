@@ -1,0 +1,91 @@
+.inv-card {
+  border: 1px solid #252840;
+  background: #0f1018;
+  border-radius: 14px;
+  overflow: hidden;
+  display: grid;
+}
+
+.inv-card__topline {
+  height: 4px;
+  background: #8a9ba8;
+}
+.inv-card__topline[data-rarity='common'] { background: #8a9ba8; }
+.inv-card__topline[data-rarity='rare'] { background: #5a9fd4; }
+.inv-card__topline[data-rarity='epic'] { background: #9b6fd0; }
+.inv-card__topline[data-rarity='legendary'] { background: #c9a84c; }
+
+.inv-card__art {
+  height: 180px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: #161824;
+}
+
+.inv-card__icon { font-size: 3rem; }
+.inv-card__mana,
+.inv-card__qty {
+  position: absolute;
+  top: 10px;
+  background: rgba(0,0,0,0.7);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+.inv-card__mana { left: 10px; }
+.inv-card__qty { right: 10px; }
+
+.inv-card__info {
+  padding: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.inv-card__name {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.inv-card__desc {
+  margin: 0.35rem 0 0;
+  color: #9ba3b7;
+  font-size: 0.92rem;
+}
+
+.inv-card__meta,
+.inv-card__status,
+.inv-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.inv-card__meta {
+  color: #c9a84c;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+.inv-card__actions button,
+.badge {
+  border: 1px solid #2a344b;
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  background: #111725;
+  color: #f4eee3;
+}
+
+.badge--ok {
+  border-color: rgba(69, 184, 114, 0.45);
+  color: #7fe2a5;
+}
+
+.badge--warn {
+  border-color: rgba(201, 168, 76, 0.45);
+  color: #f7d97f;
+}
+
+.inv-card__actions button:disabled {
+  opacity: 0.45;
+}

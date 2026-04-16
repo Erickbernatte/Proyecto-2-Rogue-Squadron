@@ -1,0 +1,27 @@
+.comment-board {
+  display: grid;
+  gap: 1rem;
+}
+
+.comment-board__item {
+  border: 1px solid #252840;
+  border-radius: 14px;
+  background: #0f1018;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.comment-board__item p,
+.comment-board__item small {
+  color: #cfd7ea;
+}
+
+.comment-board__item button {
+  background: transparent;
+  color: #ff9c9c;
+  border: 1px solid rgba(255, 156, 156, 0.4);
+  white-space: nowrap;
+}

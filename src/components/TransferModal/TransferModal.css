@@ -1,0 +1,61 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 30;
+}
+
+.modal-card {
+  width: min(100%, 420px);
+  background: #111725;
+  border: 1px solid #2a344b;
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.modal-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-card__close {
+  background: transparent;
+  border: 0;
+  color: #f4eee3;
+}
+
+.modal-card__form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.modal-card__form label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.modal-card__form select,
+.modal-card__form input {
+  background: #0b0f1a;
+  color: #f4eee3;
+  border: 1px solid #2a344b;
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.modal-card__submit {
+  background: #c9a84c;
+  color: #111725;
+  border: 0;
+}
+
+.modal-card__message {
+  margin: 0;
+  color: #d4c9a8;
+}

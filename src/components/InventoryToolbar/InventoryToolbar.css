@@ -1,0 +1,20 @@
+.toolbar {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.toolbar__search,
+.toolbar__select {
+  background: #111725;
+  color: #f4eee3;
+  border: 1px solid #2a344b;
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+}
+
+.toolbar__search {
+  flex: 1;
+  min-width: 240px;
+}

@@ -1,0 +1,13 @@
+.inv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.inv-grid__state {
+  border: 1px solid #252840;
+  border-radius: 14px;
+  padding: 1.25rem;
+  background: #0f1018;
+  color: #9ba3b7;
+}
