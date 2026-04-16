@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banner Informativo Rotativo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .banner-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .banner {
+      background: linear-gradient(90deg, #1e3a8a, #2563eb);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      min-height: 140px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .banner h2 {
+      margin: 0 0 10px 0;
+      font-size: 22px;
+    }
+
+    .banner p {
+      margin: 6px 0;
+      font-size: 15px;
+    }
+
+    .banner .type {
+      font-weight: bold;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner-container">
+    <div class="banner" id="banner">
+      <p class="type" id="bannerType"></p>
+      <h2 id="bannerTitle"></h2>
+      <p id="bannerDescription"></p>
+      <p><strong>Fecha de publicación:</strong> <span id="publishDate"></span></p>
+      <p><strong>Fecha de vigencia:</strong> <span id="validDate"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const announcements = [
+      {
+        type: "Nuevo producto",
+        title: "Llegó la Espada del Fénix",
+        description: "Nuevo ítem disponible en la tienda por tiempo limitado.",
+        publishDate: "2026-02-18",
+        validDate: "2026-02-28"
+      },
+      {
+        type: "Actualización",
+        title: "Actualización 1.2.0 del sistema",
+        description: "Se mejoró el rendimiento del inventario y la navegación principal.",
+        publishDate: "2026-02-19",
+        validDate: "2026-03-10"
+      },
+      {
+        type: "Evento especial",
+        title: "Evento Doble Recompensa",
+        description: "Participa esta semana y obtén recompensas dobles en misiones.",
+        publishDate: "2026-02-20",
+        validDate: "2026-02-25"
+      },
+      {
+        type: "Promoción",
+        title: "Promoción 2x1 en consumibles",
+        description: "Compra consumibles seleccionados y recibe unidades extra.",
+        publishDate: "2026-02-21",
+        validDate: "2026-02-24"
+      },
+      {
+        type: "Cambio de balance",
+        title: "Ajuste de balance en armas y armaduras",
+        description: "Se modificaron estadísticas para mejorar la experiencia de juego.",
+        publishDate: "2026-02-22",
+        validDate: "2026-03-05"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderBanner() {
+      const current = announcements[currentIndex];
+
+      document.getElementById("bannerType").textContent = current.type;
+      document.getElementById("bannerTitle").textContent = current.title;
+      document.getElementById("bannerDescription").textContent = current.description;
+      document.getElementById("publishDate").textContent = current.publishDate;
+      document.getElementById("validDate").textContent = current.validDate;
+    }
+
+    function rotateBanner() {
+      currentIndex = (currentIndex + 1) % announcements.length;
+      renderBanner();
+    }
+
+    renderBanner();
+    setInterval(rotateBanner, 3000);
+  </script>
+</body>
+</html>
